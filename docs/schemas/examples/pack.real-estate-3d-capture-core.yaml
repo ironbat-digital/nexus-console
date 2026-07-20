@@ -1,0 +1,66 @@
+# EXAMPLE FIXTURE — validates against v1alpha1/nexus.pack.schema.json
+# OSS core del add-on de captura 3D inmobiliaria (PoC, TARGET-STATE).
+# Carril public: mirrorable, sin cuenta Hub, SIN entitlements. Compone primitivas
+# existentes del Runtime (skill + flow + contrato de adaptador tipado). NO incluye
+# el sidecar GPU, NO descarga pesos, NO trae datos de negocio ni secretos.
+# El sidecar, el panel de UI y la provenance de pesos NO son representables en este
+# contrato (metadata/spec son additionalProperties:false); ver la spec del sector-pack
+# docs/specs/sector-packs/real-estate-3d-capture.md (brechas de contrato).
+apiVersion: nexus.io/v1alpha1
+kind: Pack
+metadata:
+  name: real-estate-3d-capture-core
+  display_name: "Real Estate 3D Capture — OSS Core"
+  version: 0.1.0
+  publisher:
+    id: ironbat
+    display_name: "Ironbat Digital LLC"
+    verification: verified
+  license: Apache-2.0
+  visibility: public
+  trademark:
+    notice: "NexusOS and Ironbat are trademarks of Ironbat Digital LLC; the Apache-2.0 content license grants no trademark rights."
+    policy_url: "https://nexusos.dev/trademark"
+  offline_signature:
+    algorithm: minisign
+    key_id: "RWSf...redacted-minisign-pubkey-id"
+    value: "RUR...redacted-minisign-signature"
+    canonicalization: jcs
+    key_custody: local_file
+spec:
+  kind_hint: vertical
+  # Carril OSS: sin required_entitlements (lo prohibe el conditional public/community).
+  compatibility:
+    runtime: ">=1.0.0 <2.0.0"
+    operator: ">=1.0.0"
+  dependencies:
+    - { name: real-estate-agency, version: ">=1.2.0" }
+  permissions:
+    - { scope: "storage:documents", reason: "Adjuntar artefactos 3D (referencias) a fichas de propiedad existentes" }
+  resources:
+    cpu_hint: "0.25 vCPU"
+    memory_hint: "256Mi"
+    cost_hint: "low"
+  agents:
+    - { id: property_3d_tour, artifact_type: skill, area: sales, cognition_profile: real_estate_advisor }
+  flows:
+    - listing_3d_tour_generation
+  skulls:
+    - id: real_estate_advisor
+      model_policy: "reuse:real-estate-agency/real_estate_advisor"
+      eval_suite: property_3d_tour_evals
+  default_mappings:
+    autonomy: human_assisted
+    property_3d_tour.requires_sidecar: real_estate_3d_capture
+  migrations:
+    - { id: "0001_seed_3d_artifact_refs", description: "Tablas de referencias a artefactos 3D (sin binarios)", reversible: true }
+  tests:
+    - { id: "skill_installs", description: "El skill property_3d_tour se registra en el area sales" }
+    - { id: "flow_template_valid", description: "La plantilla de flow listing_3d_tour_generation valida sin sidecar activo" }
+    - { id: "graceful_without_sidecar", description: "Sin sidecar GPU el skill degrada a estado informativo, nunca falla la instancia" }
+  uninstall:
+    strategy: reverse_migrations
+    notes: "Elimina skill, flow y referencias a artefactos; los binarios 3D publicados se exportan antes."
+  sbom:
+    format: cyclonedx
+    ref: "sbom/real-estate-3d-capture-core-0.1.0.cdx.json"

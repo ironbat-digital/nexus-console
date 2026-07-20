@@ -3,7 +3,7 @@
 - **Estado:** Aceptada (diseño; sin implementación)
 - **Fecha:** 2026-07-19
 - **Versión de arquitectura:** `v1alpha1`
-- **Relacionadas:** RFC-002, [ADR-0002](0002-signing-and-verification.md), [ADR-0004](0004-operator-enrollment-and-identity.md), [Visión: Portal Gestionado](../vision/nexus-os-vision-managed-portal.md)
+- **Relacionadas:** RFC-002, [ADR-0002](0002-signing-and-verification.md), [ADR-0004](0004-operator-enrollment-and-identity.md), [Visión de Nexus OS §5](../vision/nexus-os-vision.md)
 
 ## Contexto
 

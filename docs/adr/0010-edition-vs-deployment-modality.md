@@ -3,11 +3,11 @@
 - **Estado:** Aceptada (contrato de producto `v1alpha2`)
 - **Fecha:** 2026-07-19
 - **Versión de arquitectura:** `v1alpha2`
-- **Relacionadas:** [ADR-0009](0009-editions-entitlements-and-subscription-degradation.md), [Spec J](../specs/j-deployment-modalities.md), [Visión managed portal §5](../vision/nexus-os-vision-managed-portal.md)
+- **Relacionadas:** [ADR-0009](0009-editions-entitlements-and-subscription-degradation.md), [Spec J](../specs/j-deployment-modalities.md), [Visión de Nexus OS §10](../vision/nexus-os-vision.md)
 
 ## Contexto
 
-La [visión del portal gestionado](../vision/nexus-os-vision-managed-portal.md) define tres modalidades de
+La [Visión de Nexus OS §10](../vision/nexus-os-vision.md) define tres modalidades de
 despliegue (self-hosted, BYOC, managed). El nuevo modelo de producto define tres ediciones (Personal,
 Team, Organization). Confundir ambos ejes llevaría a suponer, por ejemplo, que "managed" equivale a un
 plan concreto o que Personal no puede autohospedarse. Hace falta fijar que son **ejes ortogonales**.

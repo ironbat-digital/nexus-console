@@ -45,8 +45,9 @@ La evolución hacia un **portal web gestionado** de cuatro partes — **Nexus Hu
 hospedado), **Nexus Operator** (agente saliente OSS, sin shell), **NexusOS Runtime/Platform** (plano
 de datos soberano) y **Nexus Registry** (packs firmados) — está documentada como arquitectura
 `v1alpha1` en [`docs/`](docs/README.md). Es **diseño aprobado, todavía no implementado**: ver la
-[extensión de la Visión](docs/vision/nexus-os-vision-managed-portal.md), la
-[especificación de arquitectura](docs/architecture/managed-platform-architecture.md), las
+[Visión de Nexus OS](docs/vision/nexus-os-vision.md), la
+[especificación de arquitectura](docs/architecture/nexus-os-architecture.md), la
+[especificación de desarrollo del Hub](docs/specs/b-nexus-hub.md), las
 [ADR](docs/adr/) y los [esquemas + ejemplos](docs/schemas/README.md).
 
 ## Modo local single-tenant

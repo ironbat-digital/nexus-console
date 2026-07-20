@@ -3,7 +3,7 @@
 - **Estado:** Aceptada (contrato de producto `v1alpha2`, aditivo sobre `v1alpha1`)
 - **Fecha:** 2026-07-19
 - **Versión de arquitectura:** `v1alpha2`
-- **Relacionadas:** [ADR-0002](0002-signing-and-verification.md), [ADR-0010](0010-edition-vs-deployment-modality.md), [Visión Personal + Hub](../vision/nexus-os-vision-personal-hub-subscription.md), [Spec G](../specs/g-entitlements-subscriptions-degradation.md)
+- **Relacionadas:** [ADR-0002](0002-signing-and-verification.md), [ADR-0010](0010-edition-vs-deployment-modality.md), [Visión de Nexus OS §8, §14](../vision/nexus-os-vision.md), [Spec G](../specs/g-entitlements-subscriptions-degradation.md)
 
 ## Contexto
 

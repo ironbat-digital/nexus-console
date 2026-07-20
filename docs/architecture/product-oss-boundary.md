@@ -3,7 +3,7 @@
 - **Estado:** Frontera y **modelo de licencia por componente APROBADOS** · relicencia del código existente bloqueada hasta auditoría legal · pricing numérico pendiente
 - **Versión de arquitectura:** `v1alpha1`
 - **Fecha:** 2026-07-19
-- **Relacionadas:** [ADR-0008](../adr/0008-oss-commercial-boundary-and-license.md), [ADR-0009](../adr/0009-editions-entitlements-and-subscription-degradation.md), [Visión Personal + Hub](../vision/nexus-os-vision-personal-hub-subscription.md)
+- **Relacionadas:** [ADR-0008](../adr/0008-oss-commercial-boundary-and-license.md), [ADR-0009](../adr/0009-editions-entitlements-and-subscription-degradation.md), [Visión de Nexus OS §12–§15](../vision/nexus-os-vision.md)
 
 > **Actualización de producto (`v1alpha2`).** La habilitación de capacidades pasa a expresarse mediante
 > **ediciones** (Personal/Team/Organization) y **entitlements de capacidad** firmados, no mediante

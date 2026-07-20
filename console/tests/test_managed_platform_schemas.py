@@ -538,3 +538,54 @@ def test_docs_relative_links_resolve():
             if not resolved.exists():
                 broken.append(f"{md.relative_to(REPO_ROOT)} -> {target}")
     assert not broken, "Broken relative doc links:\n" + "\n".join(broken)
+
+
+# One canonical document per role; superseded files are redirect stubs only.
+CANONICAL_DOCS = {
+    "vision": DOCS_DIR / "vision" / "nexus-os-vision.md",
+    "architecture": DOCS_DIR / "architecture" / "nexus-os-architecture.md",
+    "hub-dev-spec": DOCS_DIR / "specs" / "b-nexus-hub.md",
+}
+SUPERSEDED_STUBS = {
+    DOCS_DIR / "vision" / "nexus-os-vision-managed-portal.md": "nexus-os-vision.md",
+    DOCS_DIR / "vision" / "nexus-os-vision-personal-hub-subscription.md": "nexus-os-vision.md",
+    DOCS_DIR / "architecture" / "managed-platform-architecture.md": "nexus-os-architecture.md",
+}
+
+
+def test_canonical_docs_exist():
+    """Each canonical role resolves to exactly one existing document."""
+    missing = [role for role, path in CANONICAL_DOCS.items() if not path.exists()]
+    assert not missing, f"Missing canonical docs: {missing}"
+
+
+def test_superseded_docs_are_redirect_stubs():
+    """Superseded documents must be short stubs that flag themselves as
+    superseded and link to the canonical replacement; they must not resurface
+    as competing canonical specs."""
+    problems: list[str] = []
+    for path, canonical in SUPERSEDED_STUBS.items():
+        if not path.exists():
+            problems.append(f"{path.name}: expected superseded stub is missing")
+            continue
+        text = path.read_text(encoding="utf-8")
+        if "SUPERADO" not in text:
+            problems.append(f"{path.name}: stub does not declare itself SUPERADO")
+        if canonical not in text:
+            problems.append(f"{path.name}: stub does not link to canonical {canonical}")
+        # A stub is a redirect, not a full spec kept alive in parallel.
+        if len(text.splitlines()) > 60:
+            problems.append(f"{path.name}: stub too long to be a redirect ({len(text.splitlines())} lines)")
+    assert not problems, "Superseded-doc stub problems:\n" + "\n".join(problems)
+
+
+def test_single_canonical_hub_dev_spec():
+    """The Hub development spec is unique: b-nexus-hub.md is canonical and the
+    old portal architecture no longer competes as a Hub dev document."""
+    hub_spec = CANONICAL_DOCS["hub-dev-spec"]
+    assert hub_spec.exists()
+    portal = DOCS_DIR / "architecture" / "managed-platform-architecture.md"
+    assert "SUPERADO" in portal.read_text(encoding="utf-8"), (
+        "managed-platform-architecture.md must be a superseded stub, not a "
+        "competing Hub/architecture spec"
+    )

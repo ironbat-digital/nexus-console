@@ -3,7 +3,7 @@
 - **Estado:** Diseño aprobado · no implementado
 - **Versión de arquitectura:** `v1alpha1` con la capa aditiva `v1alpha2` (producto Personal + Hub); este documento cubre la transición v0.13.8 -> Portal Gestionado y el delta aditivo v1alpha1 -> v1alpha2.
 - **Fecha:** 2026-07-19
-- **Relacionadas:** [ADR-0001](../adr/0001-hub-operator-runtime-registry-split.md), [especificación §7](managed-platform-architecture.md#migration), RFC-002
+- **Relacionadas:** [ADR-0001](../adr/0001-hub-operator-runtime-registry-split.md), [arquitectura de Nexus OS §16](nexus-os-architecture.md), RFC-002
 
 ## Principio rector
 

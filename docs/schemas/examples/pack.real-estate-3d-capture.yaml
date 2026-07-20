@@ -1,0 +1,87 @@
+# EXAMPLE FIXTURE — validates against v1alpha1/nexus.pack.schema.json
+# Add-on premium verificado de captura 3D inmobiliaria (PoC, TARGET-STATE).
+# Carril verified-premium: requiere el entitlement de capacidad real_estate_3d_capture
+# y se obtiene por download grant de un solo uso (nunca DRM). Distribuye el sidecar GPU
+# real_estate_3d_capture (proceso local externo), no un motor de runtime nuevo.
+# La configuracion del sidecar, la provenance de pesos (SHA-256/version/licencia) y el
+# descriptor del panel de UI NO son representables aqui (additionalProperties:false):
+# viven como estado objetivo en docs/specs/sector-packs/real-estate-3d-capture.md.
+apiVersion: nexus.io/v1alpha1
+kind: Pack
+metadata:
+  name: real-estate-3d-capture
+  display_name: "Real Estate 3D Capture (premium add-on)"
+  version: 0.1.0
+  publisher:
+    id: ironbat
+    display_name: "Ironbat Digital LLC"
+    verification: verified
+  license: "LicenseRef-Ironbat-Commercial-1.0"
+  visibility: verified-premium
+  commercial_terms_ref: "https://nexusos.dev/terms/real-estate-3d-capture"
+  trademark:
+    notice: "NexusOS and Ironbat are trademarks of Ironbat Digital LLC; the content license grants no trademark rights."
+    policy_url: "https://nexusos.dev/trademark"
+  signature:
+    algorithm: sigstore-cosign
+    key_id: "https://github.com/royramosparaiso/nexus-registry/.github/workflows/publish.yml@refs/tags/v0.1.0"
+    value: "MEUCIQ...redacted-cosign-bundle-ref"
+    canonicalization: jcs
+    trust_domain: sigstore-public-good
+    key_custody: keyless_oidc
+    transparency:
+      log: rekor.sigstore.dev
+      log_index: 152901337
+      inclusion_proof: true
+      oidc_issuer: "https://token.actions.githubusercontent.com"
+      certificate_identity: "https://github.com/royramosparaiso/nexus-registry/.github/workflows/publish.yml@refs/tags/v0.1.0"
+  offline_signature:
+    algorithm: minisign
+    key_id: "RWSf...redacted-minisign-pubkey-id"
+    value: "RUR...redacted-minisign-signature"
+    canonicalization: jcs
+    key_custody: local_file
+  provenance:
+    sigstore_bundle_ref: "sigstore/real-estate-3d-capture-0.1.0.sigstore.json"
+    transparency:
+      log: rekor.sigstore.dev
+      log_index: 152901337
+    sbom_attestation_ref: "attestations/real-estate-3d-capture-0.1.0.sbom.intoto.jsonl"
+spec:
+  kind_hint: sidecar
+  required_entitlements:
+    - real_estate_3d_capture
+  compatibility:
+    runtime: ">=1.0.0 <2.0.0"
+    operator: ">=1.0.0"
+  dependencies:
+    - { name: real-estate-3d-capture-core, version: ">=0.1.0" }
+    - { name: real-estate-agency, version: ">=1.2.0" }
+  permissions:
+    - { scope: "storage:artifacts", reason: "Persistir GLB/nube de puntos/MP4 generados por el sidecar" }
+    - { scope: "compute:gpu", reason: "El sidecar de reconstruccion 3D requiere una GPU local (CUDA)" }
+    - { scope: "sidecar:local-endpoint", reason: "Hablar con el proceso sidecar por su base URL local con healthcheck" }
+  resources:
+    cpu_hint: "2 vCPU"
+    memory_hint: "8Gi"
+    cost_hint: "high"
+  agents:
+    - { id: re_3d_capture, artifact_type: sidecar, area: sales }
+  sidecars:
+    - re_3d_capture
+  default_mappings:
+    autonomy: human_assisted
+    re_3d_capture.execution_mode: local_sidecar
+  migrations:
+    - { id: "0001_seed_capture_jobs", description: "Tablas de trabajos de captura y metadatos de provenance de modelo", reversible: true }
+  tests:
+    - { id: "sidecar_health", description: "El sidecar responde readiness antes de aceptar trabajos" }
+    - { id: "entitlement_gate", description: "Sin el entitlement real_estate_3d_capture el add-on no se activa" }
+    - { id: "poc_walkthrough", description: "Un walkthrough de 2-3 min produce un GLB visible en navegador dentro del presupuesto" }
+    - { id: "retention_purge", description: "La tarea de retencion elimina artefactos vencidos de forma irreversible" }
+  uninstall:
+    strategy: reverse_migrations
+    notes: "Detiene el sidecar, revoca su endpoint y elimina trabajos; el core OSS y los datos del usuario permanecen. Exportacion previa garantizada."
+  sbom:
+    format: cyclonedx
+    ref: "sbom/real-estate-3d-capture-0.1.0.cdx.json"

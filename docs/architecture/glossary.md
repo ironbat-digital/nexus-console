@@ -1,7 +1,29 @@
-# Glosario formal — Portal Gestionado de NexusOS (`v1alpha1`)
+# Glosario formal de Nexus OS (`v1alpha1` + `v1alpha2`)
 
-Términos normativos del conjunto documental del portal gestionado. Donde un término tiene alias de
-marca y término técnico formal, se indican ambos.
+Términos normativos del conjunto documental de Nexus OS. Donde un término tiene alias de marca y término
+técnico formal, se indican ambos.
+
+<a id="nomenclatura"></a>
+## Nota de nomenclatura (normativa)
+
+`Nexus OS` es el **nombre de producto canónico de visualización**: se usa así, con espacio, en prosa,
+títulos, UI y material de cara al usuario. La nomenclatura puede revisarse más adelante **sin cambiar
+ningún contrato de arquitectura**.
+
+Los **identificadores técnicos estables se preservan tal cual** y **no** se renombran para insertar un
+espacio, a fin de mantener la compatibilidad:
+
+| Categoría | Identificador estable (no cambia) | Nombre de visualización |
+|---|---|---|
+| Símbolo compacto heredado | `NexusOS` | Nexus OS |
+| Namespace / prefijo de artefacto | `nexus`, `nexus.pack.yaml`, `nexus.blueprint.yaml` | Nexus OS |
+| `$id` de esquema | `.../schemas/v1alpha1/...`, `.../v1alpha2/...` | (contrato, sin nombre de visualización) |
+| Repositorio / paquete / API / símbolo | `nexus-console`, `nexus-core`, rutas `/v1/...` | Nexus OS |
+
+Regla: cualquier cambio de nombre de producto es **solo de visualización**. Los `$id`, namespaces, rutas
+de API y símbolos de código permanecen estables aunque el nombre de visualización evolucione.
+
+## Términos del sistema
 
 | Término | Definición | ¿Custodia datos de negocio? | ¿Se distribuye vía Registry? |
 |---|---|---|---|

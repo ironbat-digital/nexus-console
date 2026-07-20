@@ -4,6 +4,74 @@ Registra cambios en la documentación de arquitectura/producto y en los contrato
 (`docs/schemas/`). No sigue la versión del paquete `nexus-console` (SemVer del código); los contratos se
 versionan por separado (`x-nexus-contract-version`). Formato inspirado en Keep a Changelog.
 
+## [re-3d-capture] - 2026-07-20 — Add-on de sector: Real Estate 3D Capture (PoC)
+
+**Estado:** solo documentación, contratos y ejemplos (TARGET-STATE / PoC). **No** cambia ningún esquema de
+producción, `$id` ni semántica de contrato. **No** es un componente central A-M; es una capacidad de
+sector-pack opcional.
+
+### Añadido
+
+- **Spec de add-on de sector:** [`specs/sector-packs/real-estate-3d-capture.md`](specs/sector-packs/real-estate-3d-capture.md),
+  que envuelve el proyecto OSS LingBot Map como sidecar GPU local, reutilizando el patrón de la
+  [Spec M](specs/m-local-inference-voice-edge.md) y componiendo el pack `real-estate-agency`.
+- **Manifiestos de pack (fixtures válidos):** core OSS público
+  [`pack.real-estate-3d-capture-core.yaml`](schemas/examples/pack.real-estate-3d-capture-core.yaml) (sin
+  entitlement, espejable) y add-on premium verificado
+  [`pack.real-estate-3d-capture.yaml`](schemas/examples/pack.real-estate-3d-capture.yaml) (entitlement
+  `real_estate_3d_capture`).
+- **Políticas de acceso (`v1alpha2`):**
+  [core](schemas/examples/package-access-policy.real-estate-3d-capture-core.example.json) (public,
+  mirrorable) y [premium](schemas/examples/package-access-policy.real-estate-3d-capture.example.json)
+  (verified-premium, grant de un solo uso).
+- **Ejemplo compañero desired-state:**
+  [`desired-state.real-estate-3d-capture.example.json`](schemas/examples/desired-state.real-estate-3d-capture.example.json),
+  instalación de ambos packs vía intents acotados (sin secretos, solo referencias).
+- **Fixtures negativos:** core en carril público que exige entitlement, y premium sin entitlement; ambos
+  deben ser rechazados por `nexus.pack.schema.json`.
+- **Índices:** `docs/README.md` y `docs/specs/README.md` ganan una sección de add-ons de sector.
+
+### Sin cambios (invariantes preservadas)
+
+- Ningún esquema de producción se extiende. Las brechas de contrato (configuración de sidecar, provenance
+  de pesos, extensión de UI, tarea de retención) se documentan como **preguntas abiertas** en la spec del
+  add-on, no como cambios de contrato. El repositorio mixto permanece MIT hasta la auditoría legal.
+
+## [docs-reorg] - 2026-07-19 — Reorganización canónica de la documentación
+
+**Estado:** solo documentación. No cambia ningún contrato, `$id` ni semántica de esquema.
+
+### Añadido
+
+- **Visión canónica única:** [`vision/nexus-os-vision.md`](vision/nexus-os-vision.md), que unifica las dos
+  visiones previas (Portal Gestionado `v1alpha1` + Personal + Hub `v1alpha2`).
+- **Arquitectura canónica única system-wide:** [`architecture/nexus-os-architecture.md`](architecture/nexus-os-architecture.md).
+- **Especificación de desarrollo del Hub consolidada:** [`specs/b-nexus-hub.md`](specs/b-nexus-hub.md)
+  reescrita como **único** documento de desarrollo del Hub (journeys, setup, secretos, catálogo,
+  frontend/BFF, RBAC, API/eventos, seguridad, testing, criterios de aceptación).
+- **Nuevas specs de componente:** [Spec K](specs/k-cli-sdk-installer-handoff.md) (CLI/SDK/instalador/
+  handoff), [Spec L](specs/l-observability-audit-ops.md) (observabilidad/auditoría/ops/backup/soporte) y
+  [Spec M](specs/m-local-inference-voice-edge.md) (inferencia local/voz/edge, ownership canónico).
+- **ADR:** [ADR-0011](adr/0011-documentation-architecture.md) (arquitectura de documentación y canonicidad).
+- **Nota de nomenclatura** en el [glosario](architecture/glossary.md#nomenclatura): `Nexus OS` es el
+  nombre de visualización; `NexusOS`, `nexus`, `$id` de esquema y símbolos son identificadores estables.
+- **Guarda de test:** unicidad de documentos canónicos y stubs de redirección en
+  `console/tests/test_managed_platform_schemas.py`.
+
+### Cambiado
+
+- **Índices:** [`docs/README.md`](README.md) reescrito como mapa canónico (documento, alcance, estado,
+  superados) y [`specs/README.md`](specs/README.md) ampliado con k/l/m.
+- **Enlaces internos** de ADRs y docs de soporte reapuntados a la visión y arquitectura canónicas.
+
+### Superado (conservado como redirección, no borrado)
+
+- [`vision/nexus-os-vision-managed-portal.md`](vision/nexus-os-vision-managed-portal.md) y
+  [`vision/nexus-os-vision-personal-hub-subscription.md`](vision/nexus-os-vision-personal-hub-subscription.md)
+  → [`vision/nexus-os-vision.md`](vision/nexus-os-vision.md).
+- [`architecture/managed-platform-architecture.md`](architecture/managed-platform-architecture.md) →
+  [`architecture/nexus-os-architecture.md`](architecture/nexus-os-architecture.md) + [`specs/b-nexus-hub.md`](specs/b-nexus-hub.md).
+
 ## [v1alpha2] - 2026-07-19 — Capa de producto Personal + Hub por suscripción
 
 **Estado:** diseño aprobado, no implementado (TARGET-STATE). Aditivo y backward compatible sobre

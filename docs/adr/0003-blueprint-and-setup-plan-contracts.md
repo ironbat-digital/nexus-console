@@ -22,7 +22,7 @@ nuevos contratos deben ser coherentes con ese estilo.
 - **`setup.plan.yaml`** (`kind: SetupPlan`): lista ordenada de `SetupTask` con dependencias, derivada
   de un `blueprint_version` concreto. Referencia el checklist humano (`SETUP.md`).
 - **`SetupTask`**: máquina de estados (ver [ADR-0007](0007-update-channels-and-rollout.md) para
-  aprobaciones y la [especificación §setup-state-machine](../architecture/managed-platform-architecture.md#state-machine)):
+  aprobaciones y la [Spec B §12.2 máquina de estados de setup](../specs/b-nexus-hub.md)):
   `not_started → waiting_user → waiting_oauth → ready → running → completed`, con bifurcaciones
   `blocked | failed | skipped`. Cada tarea registra `owner`, `prerequisites`, `evidence`, `retry`,
   `rollback`, `escalation`. Cuando `state == failed`, `failure_reason` es obligatorio (constraint en
