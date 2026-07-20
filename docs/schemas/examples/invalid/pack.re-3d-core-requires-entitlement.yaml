@@ -1,0 +1,23 @@
+# NEGATIVE FIXTURE — MUST FAIL against v1alpha1/nexus.pack.schema.json.
+# El core es carril public (OSS): NO puede exigir entitlements. El conditional
+# public/community fija required_entitlements a maxItems 0, asi que declararlo falla.
+apiVersion: nexus.io/v1alpha1
+kind: Pack
+metadata:
+  name: real-estate-3d-capture-core
+  version: 0.1.0
+  publisher:
+    id: ironbat
+    verification: verified
+  license: Apache-2.0
+  visibility: public
+spec:
+  kind_hint: vertical
+  required_entitlements:
+    - real_estate_3d_capture
+  compatibility:
+    runtime: ">=1.0.0 <2.0.0"
+  tests:
+    - { id: "skill_installs", description: "El skill se registra" }
+  uninstall:
+    strategy: reverse_migrations

@@ -1,0 +1,17 @@
+{
+  "apiVersion": "nexus.io/v1alpha2",
+  "kind": "PackageAccessPolicy",
+  "metadata": {
+    "package": "real-estate-3d-capture-core",
+    "version": "0.1.0"
+  },
+  "spec": {
+    "visibility": "public",
+    "publisher_verification": "verified",
+    "license": "Apache-2.0",
+    "required_entitlements": [],
+    "mirrorable": true,
+    "requires_hub_account": false,
+    "distribution": "direct_download"
+  }
+}

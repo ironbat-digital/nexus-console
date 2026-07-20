@@ -15,6 +15,8 @@
     { "example": "organization-policy.no-owner.json", "schema": "organization-policy.schema.json", "version": "v1alpha2", "reason": "memberships must contain exactly one owner; zero owners is rejected (item 2)" },
     { "example": "organization-policy.two-owners.json", "schema": "organization-policy.schema.json", "version": "v1alpha2", "reason": "memberships must contain exactly one owner; two owners is rejected (item 2)" },
     { "example": "organization-policy.mixed-case-org-id.json", "schema": "organization-policy.schema.json", "version": "v1alpha2", "reason": "OrganizationId is lowercase-canonical so it round-trips inside a PackageScope (item 5)" },
-    { "example": "deployment-modality.managed-personal.json", "schema": "deployment-modality.schema.json", "version": "v1alpha2", "reason": "managed modality presupposes team/organization edition, not personal" }
+    { "example": "deployment-modality.managed-personal.json", "schema": "deployment-modality.schema.json", "version": "v1alpha2", "reason": "managed modality presupposes team/organization edition, not personal" },
+    { "example": "pack.re-3d-core-requires-entitlement.yaml", "schema": "nexus.pack.schema.json", "reason": "public/community OSS core pack must not gate on entitlements (required_entitlements maxItems 0)" },
+    { "example": "pack.re-3d-premium-missing-entitlement.yaml", "schema": "nexus.pack.schema.json", "reason": "verified-premium pack must declare a non-empty required_entitlements" }
   ]
 }

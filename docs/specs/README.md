@@ -31,6 +31,15 @@ riesgos/preguntas abiertas. Cuando una sección no aplica, se indica el motivo.
 | l | [Observabilidad, auditoría y operaciones](l-observability-audit-ops.md) | Telemetría, audit dual, backup/recuperación, soporte. |
 | m | [Inferencia local, voz y edge](m-local-inference-voice-edge.md) | LiteRT, Voicebox, VAD (ownership canónico + enlaces; parcialmente ACTUAL). |
 
+## Add-ons de sector (opcionales)
+
+Capacidades de sector-pack opcionales que **componen** primitivas existentes del Runtime. **No** son
+componentes centrales A-M ni introducen un motor de runtime nuevo.
+
+| Add-on | Alcance |
+|---|---|
+| [Real Estate 3D Capture (PoC)](sector-packs/real-estate-3d-capture.md) | Captura/reconstruccion 3D local vía sidecar GPU (LingBot Map), sobre el pack `real-estate-agency`; reutiliza el patron de sidecar de la [Spec M](m-local-inference-voice-edge.md). |
+
 **Arquitectura:** [system-wide](../architecture/nexus-os-architecture.md). **Contratos relacionados:**
 [`docs/schemas/v1alpha2/`](../schemas/v1alpha2/) y [`v1alpha1/`](../schemas/v1alpha1/). **Validación:**
 `console/tests/test_managed_platform_schemas.py`. **Mapa canónico:** [`docs/README.md`](../README.md).

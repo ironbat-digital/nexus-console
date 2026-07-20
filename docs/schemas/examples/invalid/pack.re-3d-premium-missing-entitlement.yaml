@@ -1,0 +1,23 @@
+# NEGATIVE FIXTURE — MUST FAIL against v1alpha1/nexus.pack.schema.json.
+# El add-on premium es carril verified-premium: el conditional exige
+# spec.required_entitlements no vacio. Omitirlo debe rechazarse.
+apiVersion: nexus.io/v1alpha1
+kind: Pack
+metadata:
+  name: real-estate-3d-capture
+  version: 0.1.0
+  publisher:
+    id: ironbat
+    verification: verified
+  license: "LicenseRef-Ironbat-Commercial-1.0"
+  visibility: verified-premium
+spec:
+  kind_hint: sidecar
+  compatibility:
+    runtime: ">=1.0.0 <2.0.0"
+  sidecars:
+    - re_3d_capture
+  tests:
+    - { id: "sidecar_health", description: "El sidecar responde readiness" }
+  uninstall:
+    strategy: reverse_migrations

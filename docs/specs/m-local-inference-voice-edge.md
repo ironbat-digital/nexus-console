@@ -101,6 +101,10 @@ inferir localmente. Voz: configurar base URL → healthcheck → usar TTS/STT si
 [Spec A](a-personal-runtime.md) (host), [Spec F](f-package-artifact-model.md) (distribución),
 [Spec H](h-security-trust-signing-secrets.md) (procedencia/firma).
 
+Este patron de sidecar de inferencia local lo reutiliza el add-on de sector
+[Real Estate 3D Capture (PoC)](sector-packs/real-estate-3d-capture.md), que envuelve una GPU de
+reconstruccion 3D como sidecar externo.
+
 ## 15. Migración/versionado
 
 Las capacidades actuales se preservan; su distribución como packs es aditiva. No cambia contratos

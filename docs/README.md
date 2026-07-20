@@ -46,6 +46,15 @@ Existe **exactamente un** documento canónico por rol. Cada spec de componente e
 
 Índice detallado: [`specs/README.md`](specs/README.md).
 
+### Add-ons de sector (capacidades opcionales, no componentes centrales)
+
+Especificaciones de packs de sector opcionales. **No** son componentes centrales A-M; son capacidades
+que se instalan sobre un pack de sector y componen primitivas existentes del Runtime.
+
+| Add-on | Alcance | Estado |
+|---|---|---|
+| [Real Estate 3D Capture (PoC)](specs/sector-packs/real-estate-3d-capture.md) | Captura/reconstruccion 3D local (sidecar GPU LingBot Map) sobre `real-estate-agency` | TARGET-STATE / PoC |
+
 ### Gobernanza y soporte
 | Documento | Alcance |
 |---|---|

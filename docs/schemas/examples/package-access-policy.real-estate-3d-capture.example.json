@@ -1,0 +1,19 @@
+{
+  "apiVersion": "nexus.io/v1alpha2",
+  "kind": "PackageAccessPolicy",
+  "metadata": {
+    "package": "real-estate-3d-capture",
+    "version": "0.1.0"
+  },
+  "spec": {
+    "visibility": "verified-premium",
+    "publisher_verification": "verified",
+    "license": "LicenseRef-Ironbat-Commercial-1.0",
+    "commercial_terms_ref": "https://nexusos.dev/terms/real-estate-3d-capture",
+    "required_entitlements": ["real_estate_3d_capture"],
+    "required_scopes": ["verified-premium:real-estate-3d-capture"],
+    "mirrorable": false,
+    "requires_hub_account": true,
+    "distribution": "short_lived_grant"
+  }
+}

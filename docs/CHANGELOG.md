@@ -4,6 +4,39 @@ Registra cambios en la documentación de arquitectura/producto y en los contrato
 (`docs/schemas/`). No sigue la versión del paquete `nexus-console` (SemVer del código); los contratos se
 versionan por separado (`x-nexus-contract-version`). Formato inspirado en Keep a Changelog.
 
+## [re-3d-capture] - 2026-07-20 — Add-on de sector: Real Estate 3D Capture (PoC)
+
+**Estado:** solo documentación, contratos y ejemplos (TARGET-STATE / PoC). **No** cambia ningún esquema de
+producción, `$id` ni semántica de contrato. **No** es un componente central A-M; es una capacidad de
+sector-pack opcional.
+
+### Añadido
+
+- **Spec de add-on de sector:** [`specs/sector-packs/real-estate-3d-capture.md`](specs/sector-packs/real-estate-3d-capture.md),
+  que envuelve el proyecto OSS LingBot Map como sidecar GPU local, reutilizando el patrón de la
+  [Spec M](specs/m-local-inference-voice-edge.md) y componiendo el pack `real-estate-agency`.
+- **Manifiestos de pack (fixtures válidos):** core OSS público
+  [`pack.real-estate-3d-capture-core.yaml`](schemas/examples/pack.real-estate-3d-capture-core.yaml) (sin
+  entitlement, espejable) y add-on premium verificado
+  [`pack.real-estate-3d-capture.yaml`](schemas/examples/pack.real-estate-3d-capture.yaml) (entitlement
+  `real_estate_3d_capture`).
+- **Políticas de acceso (`v1alpha2`):**
+  [core](schemas/examples/package-access-policy.real-estate-3d-capture-core.example.json) (public,
+  mirrorable) y [premium](schemas/examples/package-access-policy.real-estate-3d-capture.example.json)
+  (verified-premium, grant de un solo uso).
+- **Ejemplo compañero desired-state:**
+  [`desired-state.real-estate-3d-capture.example.json`](schemas/examples/desired-state.real-estate-3d-capture.example.json),
+  instalación de ambos packs vía intents acotados (sin secretos, solo referencias).
+- **Fixtures negativos:** core en carril público que exige entitlement, y premium sin entitlement; ambos
+  deben ser rechazados por `nexus.pack.schema.json`.
+- **Índices:** `docs/README.md` y `docs/specs/README.md` ganan una sección de add-ons de sector.
+
+### Sin cambios (invariantes preservadas)
+
+- Ningún esquema de producción se extiende. Las brechas de contrato (configuración de sidecar, provenance
+  de pesos, extensión de UI, tarea de retención) se documentan como **preguntas abiertas** en la spec del
+  add-on, no como cambios de contrato. El repositorio mixto permanece MIT hasta la auditoría legal.
+
 ## [docs-reorg] - 2026-07-19 — Reorganización canónica de la documentación
 
 **Estado:** solo documentación. No cambia ningún contrato, `$id` ni semántica de esquema.
